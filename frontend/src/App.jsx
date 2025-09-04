@@ -5,7 +5,7 @@ import Gallery from "./pages/Gallery.jsx";
 import Profile from "./pages/Profile.jsx";
 import Footer from "./components/layout/Footer.jsx";
 import Root from "./pages/Root.jsx";
-import Authenticate from './pages/Authenticate.jsx'
+import Authenticate from "./pages/Authenticate.jsx";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -21,6 +21,5 @@ export default function App() {
       ],
     },
   ]);
-
   return <RouterProvider router={router} />;
 }
