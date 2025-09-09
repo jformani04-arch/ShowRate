@@ -1,7 +1,7 @@
 export default function Login() {
   return (
     <>
-      <form className="w-80 bg-white p-6 rounded-xl shadow-lg mx-auto flex flex-col gap-4">
+      <form className="mt-20 w-80 bg-white p-6 rounded-xl shadow-lg mx-auto flex flex-col gap-4">
         <h2 className="text-2xl font-bold text-center text-gray-700">Login</h2>
 
         <div className="flex flex-col">
@@ -27,6 +27,16 @@ export default function Login() {
           className="bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600 transition-colors"
         >
           Login
+        </button>
+
+        <div className="text-xl font-bold text-center text-gray-700">
+          Or
+        </div>
+        <button
+          type="submit"
+          className="bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600 transition-colors"
+        >
+          Sign Up
         </button>
       </form>
     </>
