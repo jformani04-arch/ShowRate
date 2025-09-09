@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json()); // parse JSON bodies
 
 // Connect to MongoDB
-const dbURI = process.env.MONGO_URI || "mongodb+srv://jformani:November1824@cluster0.ffkyzan.mongodb.net/node-tutsretryWrites=true&w=majority&appName=Cluster0";
+const dbURI = process.env.MONGO_URI || `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB}?authSource=admin`;
 mongoose.connect(dbURI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));

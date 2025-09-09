@@ -8,7 +8,7 @@ export default function Navbar() {
       <Link to="/gallery">Gallery</Link>
       {/* <Link to='/mylist'>MyList</Link> */}
       {/* <Link to="/profile">Profile</Link> */}
-      <Link to="/authenticate">Login/Sign Up</Link>
+      <Link to="/login">Login/Sign Up</Link>
     </nav>
   );
 }
