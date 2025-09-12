@@ -5,10 +5,11 @@ import Gallery from "./pages/Gallery.jsx";
 import Profile from "./pages/Profile.jsx";
 import Footer from "./components/layout/Footer.jsx";
 import Root from "./pages/Root.jsx";
-import Authentication from "./pages/Authentication.jsx";
+import Login from "./pages/Login.jsx";
 import SignUp from './pages/SignUp.jsx'
 
 export default function App() {
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -18,7 +19,7 @@ export default function App() {
         { index: true, element: <Home /> },
         { path: "gallery", element: <Gallery /> },
         { path: "profile", element: <Profile /> },
-        { path: "authentication", element: <Authentication /> },
+        { path: "login", element: <Login /> },
         { path: 'signUp', element: <SignUp />},
       ],
     },

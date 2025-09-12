@@ -77,7 +77,7 @@ export default function Home() {
           <p className="text-sm sm:text-base md:text-lg mb-4">
             You’re encouraged to sign up or just start exploring!
           </p>
-          <Link to='authenticate'><button className="bg-[#ECDFCC] text-black font-bold px-4 py-2 rounded hover:bg-gray-200">
+          <Link to='login'><button className="bg-[#ECDFCC] text-black font-bold px-4 py-2 rounded hover:bg-gray-200">
             Sign Up / Login
           </button></Link>
         </div>

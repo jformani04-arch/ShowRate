@@ -1,10 +1,10 @@
-import express from 'express';
-
-//functions are handled in a controller file for cleaner code
+import express from "express";
 import { loginUser, signupUser } from "../controllers/authController.js";
 
-//endpoints for the frontend user sign in: handled in the relative controller
-router.post('/login', loginUser);
-router.post('/signUp', signupUser)
+const router = express.Router();
+
+// Public routes
+router.post("/login", loginUser);
+router.post("/signup", signupUser);
 
 export default router;
