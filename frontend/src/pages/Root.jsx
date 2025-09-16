@@ -4,7 +4,7 @@ import Footer from "../components/layout/Footer";
 
 export default function Root() {
   return (
-    <div className="flex flex-col min-h-screen">
+  <div className="flex flex-col min-h-screen">
       <Navbar />
 
       {/* This will grow to fill remaining space */}

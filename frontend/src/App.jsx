@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navbar from "./components/layout/Navbar.jsx";
 import Home from "./pages/Home.jsx";
-import Gallery from "./pages/Gallery.jsx";
+import MovieGallery from "./pages/MovieGallery.jsx";
 import Profile from "./pages/Profile.jsx";
 import Footer from "./components/layout/Footer.jsx";
 import Root from "./pages/Root.jsx";
@@ -17,7 +17,7 @@ export default function App() {
       errorElement: <Error />,
       children: [
         { index: true, element: <Home /> },
-        { path: "gallery", element: <Gallery /> },
+        { path: "moviegallery", element: <MovieGallery /> },
         { path: "profile", element: <Profile /> },
         { path: "login", element: <Login /> },
         { path: 'signUp', element: <SignUp />},
