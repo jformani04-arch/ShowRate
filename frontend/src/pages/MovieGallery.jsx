@@ -73,19 +73,16 @@ function MovieGallery() {
             (movie) =>
               movie.poster_path && (
                 <div key={movie.id} className="w-48 h-80 mb-5">
-                  {/* Poster Image */}
                   <img
                     className="rounded-t-xl h-64 w-full object-cover"
                     src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                     alt={movie.title}
                   />
 
-                  {/* Movie Info */}
                   <div className="flex flex-col bg-[#3C3D37] min-h-25 rounded-b-lg text-center justify-center pt-1">
                     <a className="font-bold text-[#ECDFCC]">{movie.title}</a>
                     <a className="text-[#ECDFCC]">{movie.release_date}</a>
 
-                    {/* Buttons */}
                     <div
                       id="buttonContainer"
                       className="flex justify-evenly mt-auto"
