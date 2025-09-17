@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
+import tv from "../assets/tv.png";
 const API_URL = import.meta.env.VITE_API_URL;
 
-
 export default function Authentication() {
-  
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
@@ -49,73 +49,90 @@ export default function Authentication() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="mt-20 w-100 bg-white p-6 rounded-xl shadow-lg mx-auto flex flex-col gap-4"
-    >
-      <h2 className="text-2xl font-bold text-center text-gray-700">Sign Up</h2>
+    <div className="flex items-center justify-center min-h-screen px-4">
+      <div className="flex flex-col md:flex-row bg-white rounded-2xl shadow-xl overflow-hidden max-w-4xl w-full">
+        <form
+          onSubmit={handleSubmit}
+          className="w-full md:w-1/2 p-8 flex flex-col gap-4 border-r border-gray-200"
+        >
+          <h2 className="text-3xl font-bold text-gray-800 text-left mb-4">
+            <p>Create Your Account</p>
+            <p>Sign Up Below</p>
+          </h2>
 
-      <div className="flex flex-col">
-        <label className="mb-1 text-gray-600 font-medium">Username</label>
-        <input
-          type="text"
-          placeholder="Enter username"
-          className="border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
-          value={user}
-          onChange={handleUsername}
-          required
-        />
+          <div className="flex flex-col">
+            <label className="mb-1 text-gray-600 font-medium">Username</label>
+            <input
+              type="text"
+              placeholder="Enter username"
+              className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-blue-500"
+              value={user}
+              onChange={handleUsername}
+              required
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label className="mb-1 text-gray-600 font-medium">Email</label>
+            <input
+              type="email"
+              placeholder="Enter email"
+              className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-blue-500"
+              value={email}
+              onChange={handleEmail}
+              required
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label className="mb-1 text-gray-600 font-medium">Password</label>
+            <input
+              type="password"
+              placeholder="Enter password"
+              className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-blue-500"
+              value={pass}
+              onChange={handlePassword}
+              required
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label className="mb-1 text-gray-600 font-medium">
+              Verify Password
+            </label>
+            <input
+              type="password"
+              placeholder="Re-enter password"
+              className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-blue-500"
+              value={verifyPass}
+              onChange={handleVerifyPass}
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="bg-blue-500 text-white font-semibold py-3 rounded-lg hover:bg-blue-600 transition-colors"
+          >
+            Sign Up
+          </button>
+
+          <p className="text-center text-sm text-gray-600 mt-2">
+            Already have an account?{" "}
+            <Link to="/login" className="text-blue-500 hover:underline">
+              Login
+            </Link>
+          </p>
+        </form>
+
+        <div className="hidden md:flex w-1/2 items-center justify-center bg-gray-50">
+          <img
+            src={tv}
+            alt="Sign Up"
+            className="max-h-80 w-auto object-contain"
+          />
+        </div>
       </div>
-
-      <div className="flex flex-col">
-        <label className="mb-1 text-gray-600 font-medium">Email</label>
-        <input
-          type="email"
-          placeholder="Enter email"
-          className="border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
-          value={email}
-          onChange={handleEmail}
-          required
-        />
-      </div>
-
-      <div className="flex flex-col">
-        <label className="mb-1 text-gray-600 font-medium">Password</label>
-        <input
-          type="password"
-          placeholder="Enter password"
-          className="border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
-          value={pass}
-          onChange={handlePassword}
-          required
-        />
-      </div>
-
-      <div className="flex flex-col">
-        <label className="mb-1 text-gray-600 font-medium">Verify Password</label>
-        <input
-          type="password"
-          placeholder="Re-enter password"
-          className="border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
-          value={verifyPass}
-          onChange={handleVerifyPass}
-          required
-        />
-      </div>
-
-      <button
-        type="submit"
-        className="bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600 transition-colors"
-      >
-        Sign Up
-      </button>
-
-      <div className="text-center mt-2 text-gray-700">
-        Already have an account?{" "}
-        <Link to="/login" className="text-blue-500 hover:underline">
-          Login
-        </Link>
-      </div>
-    </form>
+    </div>
   );
 }
