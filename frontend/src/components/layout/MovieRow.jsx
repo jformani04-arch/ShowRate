@@ -33,7 +33,7 @@ const MovieRow = ({ title, movies }) => {
       {/* Scroll Container */}
       <div
         ref={rowRef}
-        className="flex gap-5 h-90 overflow-x-auto hide-scrollbar scroll-smooth px-4"
+        className="flex gap-5 h-90 overflow-x-auto hide-scrollbar scroll-smooth px-4 py-4"
       >
         {movies
           .filter((movie) => movie.poster_path)
