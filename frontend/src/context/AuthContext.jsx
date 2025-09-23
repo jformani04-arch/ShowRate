@@ -6,21 +6,33 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  // On app load, check localStorage for a saved token
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
-      setUser({ token }); 
-    }
+    if (!token) return;
+
+    fetch("http://localhost:3000/api/me", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.loggedIn) {
+          setUser(data.user); 
+        } else {
+          setUser(null);
+        }
+      })
+      .catch(() => setUser(null));
   }, []);
 
-  // Called when login succeeds
-  function login(token) {
+  function login(token, userData) {
     localStorage.setItem("token", token);
-    setUser({ token });
+    setUser(userData); 
   }
 
-  // Called when logout button is clicked
   function logout() {
     localStorage.removeItem("token");
     setUser(null);
@@ -33,7 +45,6 @@ export function AuthProvider({ children }) {
   );
 }
 
-// Custom hook to access context in components
 export function useAuth() {
   return useContext(AuthContext);
 }

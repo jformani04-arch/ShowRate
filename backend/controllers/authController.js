@@ -60,3 +60,31 @@ export const loginUser = async (req, res) => {
   }
 };
 
+export const checkLogin = async (req, res) => {
+  try {
+    const token = req.headers["authorization"]?.split(" ")[1];
+    if (!token) return res.json({ loggedIn: false });
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    // fetch user from DB
+    const user = await User.findById(decoded.id).select("username email");
+    if (!user) return res.json({ loggedIn: false });
+
+    return res.json({
+      loggedIn: true,
+      user: { id: user._id, username: user.username, email: user.email },
+    });
+  } catch {
+    return res.json({ loggedIn: false });
+  }
+};
+
+export const logoutUser = (req, res) => {
+  // if token stored in cookie, you could clear it here:
+  // res.clearCookie("token");
+
+  // For frontend-managed token (localStorage), just respond success
+  res.json({ message: "Logged out successfully" });
+};
+
