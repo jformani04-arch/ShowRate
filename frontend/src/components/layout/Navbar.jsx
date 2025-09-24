@@ -11,7 +11,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 w-full h-15 bg-[#697565]/40 backdrop-blur-sm flex items-center px-8 text-xl">
+    <nav className="fixed top-0 w-full h-15 bg-[#697565]/40 backdrop-blur-sm flex items-center px-8 text-xl z-50">
       <h1 className="text-white text-3xl font-bold mr-10">🎬 FilmRate</h1>
 
       {/* Left side links */}
@@ -28,7 +28,13 @@ export default function Navbar() {
       <div className="ml-auto">
         {user ? (
           <div className="flex items-center space-x-4">
-            <span className='text-white'>{user.username}</span>
+            <span className="text-white">{user.username}</span>
+            <Link
+              to="/profile"
+              className="text-white bg-[#697565] px-3 py-1 rounded"
+            >
+              Profile
+            </Link>
             <button
               onClick={handleLogout}
               className="text-white bg-red-600 px-3 py-1 rounded"
@@ -50,3 +56,5 @@ export default function Navbar() {
     </nav>
   );
 }
+
+
