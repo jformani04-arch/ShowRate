@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    fetch("http://localhost:3000/api/me", {
+    fetch(`${import.meta.env.VITE_API_URL}/api/me`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -19,8 +19,16 @@ export function AuthProvider({ children }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.loggedIn) {
-          setUser(data.user); 
+        if (data.loggedIn && data.user) {
+          setUser({
+            id: data.user.id,
+            username: data.user.username,
+            email: data.user.email,
+            profilePhoto: data.user.profilePhoto || "/uploads/default-avatar.png",
+            bio: data.user.bio || "",
+            lastActive: data.user.lastActive || null,
+            dateJoined: data.user.dateJoined || null,
+          });
         } else {
           setUser(null);
         }
@@ -30,7 +38,15 @@ export function AuthProvider({ children }) {
 
   function login(token, userData) {
     localStorage.setItem("token", token);
-    setUser(userData); 
+    setUser({
+      id: userData.id,
+      username: userData.username,
+      email: userData.email,
+      profilePhoto: userData.profilePhoto || "/uploads/default-avatar.png",
+      bio: userData.bio || "",
+      lastActive: userData.lastActive || null,
+      dateJoined: userData.dateJoined || null,
+    });
   }
 
   function logout() {

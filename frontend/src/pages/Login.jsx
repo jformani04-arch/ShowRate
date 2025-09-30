@@ -19,37 +19,38 @@ export default function Authentication() {
     setPass(e.target.value);
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+ async function handleSubmit(e) {
+  e.preventDefault();
 
-    const payload = {
-      identifier: user,
-      password: pass,
-    };
+  const payload = {
+    identifier: user,
+    password: pass,
+  };
 
-    try {
-      const res = await fetch(`${API_URL}/api/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+  try {
+    const res = await fetch(`${API_URL}/api/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-      const data = await res.json();
-      console.log("Server response:", data);
+    const data = await res.json();
+    console.log("Server response:", data);
 
-      if (data.token) {
-        login(data.token, data.username);
+    if (data.token && data.user) {
+      login(data.token, data.user); // <-- fixed
 
-        alert("Login successful!");
-        navigate("/");
-      } else {
-        alert(data.message || "Login failed. Please try again.");
-      }
-    } catch (err) {
-      console.error("Error:", err);
-      alert("Something went wrong. Please try again later.");
+      alert("Login successful!");
+      navigate("/");
+    } else {
+      alert(data.message || "Login failed. Please try again.");
     }
+  } catch (err) {
+    console.error("Error:", err);
+    alert("Something went wrong. Please try again later.");
   }
+}
+
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
