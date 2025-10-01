@@ -45,7 +45,6 @@ export function AuthProvider({ children }) {
       profilePhoto: userData.profilePhoto || "/uploads/default-avatar.png",
       bio: userData.bio || "",
       lastActive: userData.lastActive || null,
-      dateJoined: userData.dateJoined || null,
     });
   }
 
