@@ -1,12 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Navbar from "./components/layout/Navbar.jsx";
 import Home from "./pages/Home.jsx";
 import MovieGallery from "./pages/MovieGallery.jsx";
 import Profile from "./pages/Profile.jsx";
-import Footer from "./components/layout/Footer.jsx";
 import Root from "./pages/Root.jsx";
 import Login from "./pages/Login.jsx";
 import SignUp from './pages/SignUp.jsx'
+import ListsPage from './pages/ListsPage.jsx'
 
 export default function App() {
 
@@ -21,6 +20,7 @@ export default function App() {
         { path: "profile", element: <Profile /> },
         { path: "login", element: <Login /> },
         { path: 'signUp', element: <SignUp />},
+        { path: 'listspage', element: <ListsPage />},
       ],
     },
   ]);

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { getPopularMovies } from "../api/tmdb.js";
-import { searchMovies } from "../api/tmdb.js";
+import { getPopularMovies, searchMovies } from "../api/tmdb.js";
 import headerImage from "../assets/movieTheatre.jpg";
 
 function MovieGallery() {
@@ -11,33 +10,53 @@ function MovieGallery() {
   useEffect(() => {
     async function handleMovies() {
       try {
+        let data;
         if (search.trim() === "") {
-          const data = await getPopularMovies(page);
-          if (data && data.results) {
-            setMovies((prevMovies) =>
-              page === 1 ? data.results : [...prevMovies, ...data.results]
-            );
-          }
+          data = await getPopularMovies(page);
         } else {
-          const data = await searchMovies(search);
-          if (data && data.results) {
-            setMovies(data.results);
-          }
+          data = await searchMovies(search);
+        }
+
+        if (data && data.results) {
+          setMovies((prev) =>
+            page === 1 || search.trim() !== ""
+              ? data.results
+              : [...prev, ...data.results]
+          );
         }
       } catch (err) {
-        setError(err.message);
+        console.error(err);
       }
     }
-
     handleMovies();
   }, [page, search]);
 
-  function handlePage() {
-    setPage((prevPage) => prevPage + 1);
+  async function addToRankedList(movie) {
+    try {
+      const res = await fetch("http://localhost:3000/api/rankedList", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          tmdbId: movie.id,
+          title: movie.title,
+          poster_path: movie.poster_path,
+          rank: 0, // default rank
+        }),
+      });
+
+      const data = await res.json();
+      console.log("Added to ranked list:", data);
+      alert(`${movie.title} added to your ranked list!`);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
-  function handleSearch(e) {
-    setSearch(e.target.value);
+  function handlePage() {
+    setPage((prev) => prev + 1);
   }
 
   return (
@@ -59,7 +78,7 @@ function MovieGallery() {
         </div>
 
         <input
-          onChange={handleSearch}
+          onChange={(e) => setSearch(e.target.value)}
           value={search}
           type="text"
           placeholder="Search For a Movie"
@@ -78,32 +97,16 @@ function MovieGallery() {
                     src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                     alt={movie.title}
                   />
-
                   <div className="flex flex-col bg-[#3C3D37] min-h-25 rounded-b-lg text-center justify-center pt-1">
-                    <a className="font-bold text-[#ECDFCC]">{movie.title}</a>
-                    <a className="text-[#ECDFCC]">{movie.release_date}</a>
+                    <p className="font-bold text-[#ECDFCC]">{movie.title}</p>
+                    <p className="text-[#ECDFCC]">{movie.release_date}</p>
 
-                    <div
-                      id="buttonContainer"
-                      className="flex justify-evenly mt-auto"
-                    >
+                    <div className="flex justify-evenly mt-auto">
                       <button
                         className="hover:scale-120 transition-transform duration-200 cursor-pointer"
-                        alt="addToList"
+                        onClick={() => addToRankedList(movie)}
                       >
                         ➕
-                      </button>
-                      <button
-                        className="hover:scale-120 transition-transform duration-200 cursor-pointer"
-                        alt="removeFromList"
-                      >
-                        ➖
-                      </button>
-                      <button
-                        className="hover:scale-120 transition-transform duration-200 cursor-pointer"
-                        alt="favorite"
-                      >
-                        ⭐️
                       </button>
                     </div>
                   </div>

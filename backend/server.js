@@ -8,7 +8,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import userRoutes from "./routes/users.js";
-import userMoviesRoutes from "./routes/userMovies.js"; 
+import rankedListRoutes from './routes/rankedList.js'
 
 
 
@@ -36,7 +36,7 @@ mongoose
 
 app.use("/api", authRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api", userMoviesRoutes);
+app.use("/api/rankedList", rankedListRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 

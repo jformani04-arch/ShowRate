@@ -30,34 +30,16 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-
-
-  likedMovies: [
+  rankedList: [
     {
       tmdbId: { type: Number, required: true }, 
-    },
-  ],
-
-
-  ratings: [
-    {
-      tmdbId: { type: Number, required: true },
-      score: { type: Number, min: 1, max: 10, required: true },
-    },
-  ],
-
- 
-  lists: [
-    {
-      name: { type: String, required: true },
-      movies: [
-        {
-          tmdbId: { type: Number, required: true },
-          rank: { type: Number, default: 0 },
-        },
-      ],
-    },
-  ],
+      title: { type: String, required: true },
+      posterPath: { type: String },             
+      overview: { type: String },               
+      rank: { type: Number, required: true },   
+      addedAt: { type: Date, default: Date.now }
+    }
+  ]
 });
 
 export default mongoose.model("User", UserSchema);
