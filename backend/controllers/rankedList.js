@@ -15,7 +15,7 @@ export const getRankedList = async (req, res) => {
 // Add a movie to the ranked list
 export const addMovieToRankedList = async (req, res) => {
   try {
-    const { tmdbId, title, poster_path, release_date } = req.body;
+    const { tmdbId, title, posterPath, release_date } = req.body;
 
     if (!tmdbId || !title) {
       return res.status(400).json({ message: "tmdbId and title are required" });
@@ -31,7 +31,7 @@ export const addMovieToRankedList = async (req, res) => {
     user.rankedList.push({
       tmdbId,
       title,
-      poster_path,
+      posterPath,
       release_date,
       rank: 0, // default rank
     });

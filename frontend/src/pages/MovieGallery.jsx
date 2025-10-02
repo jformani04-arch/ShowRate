@@ -31,6 +31,7 @@ function MovieGallery() {
     handleMovies();
   }, [page, search]);
 
+  // Add movie to user's ranked list
   async function addToRankedList(movie) {
     try {
       const res = await fetch("http://localhost:3000/api/rankedList", {
@@ -42,7 +43,7 @@ function MovieGallery() {
         body: JSON.stringify({
           tmdbId: movie.id,
           title: movie.title,
-          poster_path: movie.poster_path,
+          posterPath: movie.poster_path, // ✅ use posterPath
           rank: 0, // default rank
         }),
       });
