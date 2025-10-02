@@ -45,7 +45,7 @@ export default function Profile() {
                 {user?.username}
               </h1>
               <h2>
-                <input type='text' className='border-1 text-center mt-5'></input>
+                <input type='text' className='border-1 border-white text-white text-center text-center mt-5'></input>
               </h2>
             </div>
           </div>
