@@ -22,13 +22,25 @@ export default function Navbar() {
         <Link to="/moviegallery" className="text-white">
           Gallery
         </Link>
+        {user && (
+          <Link to="/listspage" className="text-white">
+            MyList
+          </Link>
+        )}
       </div>
 
       {/* Right side */}
       <div className="ml-auto">
         {user ? (
           <div className="flex items-center space-x-4">
-            <span className="text-white">{user.username}</span>
+            <img
+              src={`http://localhost:3000${
+                user?.profilePhoto || "/uploads/default-avatar.png"
+              }`}
+              alt={user ? `${user.username}'s profile` : "Default profile"}
+              className="w-10"
+            />
+            <span className="text-white font-bold mr-6">{user.username}</span>
             <Link
               to="/profile"
               className="text-white bg-[#697565] px-3 py-1 rounded"
@@ -56,5 +68,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
-
